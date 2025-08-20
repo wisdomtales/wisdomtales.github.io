@@ -7,365 +7,112 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #fef7f0 0%, #f8f4f8 25%, #f0f8ff 50%, #f9f7ff 75%, #fff5f5 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            padding: 20px; position: relative; overflow-x: hidden;
         }
-
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(221, 160, 221, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 60% 10%, rgba(173, 216, 230, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+            content: ''; position: fixed; inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255,182,193,.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(221,160,221,.08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 10%, rgba(173,216,230,.1) 0%, transparent 50%);
+            pointer-events: none; z-index: -1;
         }
-
         .storybook-container {
-            max-width: 420px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.08),
-                0 0 0 1px rgba(255, 255, 255, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            overflow: hidden;
-            position: relative;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            max-width: 420px; width: 100%; background: rgba(255,255,255,.95);
+            backdrop-filter: blur(20px); border-radius: 32px;
+            box-shadow: 0 25px 50px rgba(0,0,0,.08), 0 0 0 1px rgba(255,255,255,.5), inset 0 1px 0 rgba(255,255,255,.9);
+            overflow: hidden; position: relative; border: 2px solid rgba(255,255,255,.3);
         }
-
         .story-header {
             background: linear-gradient(135deg, #ffeef8 0%, #f0e8f8 100%);
-            color: #6b4e7d;
-            text-align: center;
-            padding: 32px 24px;
-            position: relative;
-            overflow: hidden;
+            color: #6b4e7d; text-align: center; padding: 32px 24px; position: relative; overflow: hidden;
         }
-
         .story-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 70% 30%, rgba(221, 160, 221, 0.1) 0%, transparent 40%);
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background:
+                radial-gradient(circle, rgba(255,182,193,.15) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(221,160,221,.1) 0%, transparent 40%);
             animation: float 20s infinite linear;
         }
-
-        .story-header h1 {
-            font-family: 'Crimson Text', serif;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .story-header p {
-            font-size: 14px;
-            opacity: 0.8;
-            font-weight: 300;
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes float {
-            0% { transform: rotate(0deg) translateX(0px) translateY(0px); }
-            100% { transform: rotate(360deg) translateX(0px) translateY(0px); }
-        }
-
+        .story-header h1 { font-family: 'Crimson Text', serif; font-size: 28px; font-weight: 600; margin-bottom: 8px; position: relative; z-index: 2; }
+        .story-header p { font-size: 14px; opacity: .8; font-weight: 300; position: relative; z-index: 2; }
+        @keyframes float { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .page-container {
-            display: none;
-            padding: 50px 40px;
-            min-height: 520px;
-            position: relative;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(205, 133, 63, 0.015) 0%, transparent 70%),
+            display: none; padding: 50px 40px; min-height: 520px; position: relative;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(139,69,19,.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(160,82,45,.02) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(205,133,63,.015) 0%, transparent 70%),
                 linear-gradient(135deg, #faf7f2 0%, #f5f1ea 25%, #f8f5f0 50%, #f6f3ed 75%, #faf8f3 100%);
-            border-left: 3px solid rgba(139, 69, 19, 0.1);
-            border-right: 1px solid rgba(160, 82, 45, 0.05);
+            border-left: 3px solid rgba(139,69,19,.1);
+            border-right: 1px solid rgba(160,82,45,.05);
         }
-        
         .page-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 24px,
-                    rgba(139, 69, 19, 0.02) 24px,
-                    rgba(139, 69, 19, 0.02) 25px
-                );
+            content: ''; position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(139,69,19,.02) 24px, rgba(139,69,19,.02) 25px);
             pointer-events: none;
         }
-        
         .page-container::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            right: 15px;
-            bottom: 10px;
-            border: 1px solid rgba(139, 69, 19, 0.04);
-            pointer-events: none;
+            content: ''; position: absolute; top: 10px; left: 15px; right: 15px; bottom: 10px;
+            border: 1px solid rgba(139,69,19,.04); pointer-events: none;
         }
-
-        .page-container.active {
-            display: block;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .title-page {
-            text-align: center;
-            padding: 60px 40px;
-        }
-
-        .title-page h2 {
-            font-family: 'Crimson Text', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #2c2016;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .title-page .author {
-            font-family: 'Crimson Text', serif;
-            font-size: 16px;
-            color: #8b4513;
-            font-style: italic;
-            margin-top: 30px;
-        }
-
+        .page-container.active { display: block; animation: fadeInUp .6s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .title-page { text-align: center; padding: 60px 40px; }
+        .title-page h2 { font-family: 'Crimson Text', serif; font-size: 32px; font-weight: 700; color: #2c2016; margin-bottom: 20px; line-height: 1.3; }
+        .title-page .author { font-family: 'Crimson Text', serif; font-size: 16px; color: #8b4513; font-style: italic; margin-top: 30px; }
         .page-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 32px;
-            box-shadow: 
-                0 8px 16px rgba(139, 69, 19, 0.15),
-                0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid rgba(139, 69, 19, 0.08);
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 2;
+            width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 32px;
+            box-shadow: 0 8px 16px rgba(139,69,19,.15), 0 2px 4px rgba(0,0,0,.1);
+            border: 2px solid rgba(139,69,19,.08); transition: transform .3s ease; position: relative; z-index: 2;
         }
-
-        .page-image:hover {
-            transform: scale(1.02);
-        }
-
+        .page-image:hover { transform: scale(1.02); }
         .page-text {
-            font-family: 'Crimson Text', serif;
-            font-size: 19px;
-            line-height: 1.8;
-            color: #2c2016;
-            margin-bottom: 28px;
-            padding: 0;
-            background: transparent;
-            backdrop-filter: none;
-            border-radius: 0;
-            border: none;
-            box-shadow: none;
-            font-weight: 400;
-            text-align: left;
-            text-indent: 2em;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 2;
+            font-family: 'Crimson Text', serif; font-size: 19px; line-height: 1.8; color: #2c2016; margin-bottom: 28px;
+            text-align: left; text-indent: 2em; letter-spacing: .3px; position: relative; z-index: 2;
         }
-
-        .page-text p {
-            margin-bottom: 1.2em;
-        }
-
-        .page-text p:first-child {
-            text-indent: 0;
-        }
-
-        .dialogue {
-            margin: 1.5em 0;
-            padding-left: 1em;
-            border-left: 2px solid rgba(139, 69, 19, 0.2);
-            font-style: italic;
-        }
-
+        .page-text p { margin-bottom: 1.2em; }
+        .page-text p:first-child { text-indent: 0; }
+        .dialogue { margin: 1.2em 0; padding-left: 1em; border-left: 2px solid rgba(139,69,19,.2); font-style: italic; text-indent: 0; }
         .page-number {
-            position: absolute;
-            bottom: 25px;
-            right: 40px;
-            background: rgba(139, 69, 19, 0.1);
-            color: #8b4513;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 500;
-            font-family: 'Crimson Text', serif;
-            border: 1px solid rgba(139, 69, 19, 0.2);
-            z-index: 2;
+            position: absolute; bottom: 25px; right: 40px;
+            background: rgba(139,69,19,.1); color: #8b4513; padding: 6px 12px; border-radius: 4px; font-size: 13px;
+            font-weight: 500; font-family: 'Crimson Text', serif; border: 1px solid rgba(139,69,19,.2); z-index: 2;
         }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 32px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
+        .navigation { display: flex; justify-content: space-between; align-items: center; padding: 24px 32px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-top: 1px solid rgba(255,255,255,.5); }
         .nav-button {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 
-                0 4px 12px rgba(245, 158, 11, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; border: none; padding: 14px 24px; border-radius: 20px;
+            cursor: pointer; font-size: 14px; font-weight: 500; transition: all .3s ease;
+            box-shadow: 0 4px 12px rgba(245,158,11,.3), 0 0 0 1px rgba(255,255,255,.1); position: relative; overflow: hidden;
         }
-
         .nav-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transition: left .6s ease;
         }
-
-        .nav-button:hover::before {
-            left: 100%;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 6px 16px rgba(245, 158, 11, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-button:disabled {
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            color: #94a3b8;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #d8b4fe, #c084fc);
-            border-radius: 0 0 32px 32px;
-            transition: width 0.3s ease;
-        }
-
+        .nav-button:hover::before { left: 100%; }
+        .nav-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(245,158,11,.4), 0 0 0 1px rgba(255,255,255,.2); }
+        .nav-button:disabled { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+        .progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, #d8b4fe, #c084fc); border-radius: 0 0 32px 32px; transition: width .3s ease; }
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .storybook-container {
-                border-radius: 24px;
-                max-width: 100%;
-            }
-            
-            .story-header {
-                padding: 24px 20px;
-            }
-            
-            .story-header h1 {
-                font-size: 24px;
-            }
-            
-            .page-container {
-                padding: 40px 30px;
-                min-height: 480px;
-            }
-            
-            .page-text {
-                font-size: 17px;
-                line-height: 1.7;
-            }
-            
-            .title-page h2 {
-                font-size: 28px;
-            }
-            
-            .navigation {
-                padding: 20px 24px;
-            }
-            
-            .nav-button {
-                padding: 12px 20px;
-                font-size: 13px;
-            }
+            body { padding: 10px; }
+            .storybook-container { border-radius: 24px; max-width: 100%; }
+            .story-header { padding: 24px 20px; }
+            .story-header h1 { font-size: 24px; }
+            .page-container { padding: 40px 30px; min-height: 480px; }
+            .page-text { font-size: 17px; line-height: 1.7; }
+            .title-page h2 { font-size: 28px; }
+            .navigation { padding: 20px 24px; }
+            .nav-button { padding: 12px 20px; font-size: 13px; }
         }
-
         @media (max-width: 380px) {
-            .navigation {
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .nav-button {
-                width: 100%;
-            }
+            .navigation { flex-direction: column; gap: 12px; }
+            .nav-button { width: 100%; }
         }
     </style>
 </head>
@@ -397,9 +144,10 @@
 
         <!-- Page 3 -->
         <div class="page-container" id="page3">
-            <img src="images/story-1/image3.png" alt="Akbar consulting with mystics" class="page-image">
+            <img src="images/story-1/image3.png" alt="Akbar summoning Birbal" class="page-image">
             <div class="page-text">
-                <div class="dialogue">"I've consulted the greatest mystics in the empire. Some suggest fasting for forty days while chanting sacred mantras. Others recommend sitting motionless in meditation for months. The Sufi masters speak of whirling until consciousness dissolves. The yogis promise enlightenment through breathing techniques."</div>
+                <p>One morning, he summoned Birbal with great excitement. <span class="dialogue">"Birbal! I have decided to experience the Divine directly. I want the most profound spiritual experience possible—something that will transform me completely and give me eternal bliss!"</span></p>
+                <p>Birbal stroked his beard thoughtfully. <span class="dialogue">"A noble quest, Jahapanah. What do you have in mind?"</span></p>
             </div>
             <div class="page-number">3</div>
         </div>
@@ -408,7 +156,8 @@
         <div class="page-container" id="page4">
             <img src="images/story-1/image4.png" alt="Akbar speaking with Birbal" class="page-image">
             <div class="page-text">
-                <div class="dialogue">"All excellent methods, Your Majesty. Which one appeals to you?"</div>
+                <p><span class="dialogue">"I've consulted the greatest mystics in the empire. Some suggest fasting for forty days while chanting sacred mantras. Others recommend sitting motionless in meditation for months. The Sufi masters speak of whirling until consciousness dissolves. The yogis promise enlightenment through breathing techniques."</span></p>
+                <p><span class="dialogue">"All excellent methods, Your Majesty. Which one appeals to you?"</span></p>
                 <p>Akbar's eyes gleamed. <span class="dialogue">"Why choose? I want to try them ALL! Surely combining every technique will give me the most powerful spiritual experience ever achieved!"</span></p>
             </div>
             <div class="page-number">4</div>
@@ -418,9 +167,9 @@
         <div class="page-container" id="page5">
             <img src="images/story-1/image5.png" alt="Birbal proposing his experiment" class="page-image">
             <div class="page-text">
-                <div class="dialogue">"Brilliant logic," Birbal nodded. "But may I suggest something first?"</div>
-                <div class="dialogue">"Of course."</div>
-                <div class="dialogue">"Before we begin this grand spiritual adventure, perhaps we should test these methods scientifically. Let me conduct a small experiment."</div>
+                <p><span class="dialogue">"Brilliant logic,"</span> Birbal nodded. <span class="dialogue">"But may I suggest something first?"</span></p>
+                <p><span class="dialogue">"Of course."</span></p>
+                <p><span class="dialogue">"Before we begin this grand spiritual adventure, perhaps we should test these methods scientifically. Let me conduct a small experiment."</span></p>
                 <p>Intrigued, Akbar agreed. The next day, Birbal announced a contest in the royal court. <span class="dialogue">"His Majesty wishes to reward the person who can have the most extraordinary spiritual experience using any method they choose. The winner will receive a thousand gold coins!"</span></p>
             </div>
             <div class="page-number">5</div>
@@ -430,7 +179,8 @@
         <div class="page-container" id="page6">
             <img src="images/story-1/image6.png" alt="Spiritual seekers in the palace" class="page-image">
             <div class="page-text">
-                Word spread throughout the kingdom, and soon the palace was filled with spiritual seekers, each demonstrating their technique. One man sat in perfect stillness, claiming he could remain motionless for days. Another chanted "Ram Ram Ram" so continuously that he spoke of nothing else. A third spun in circles until he collapsed, insisting he had touched the divine. After watching for hours, Akbar turned to Birbal in confusion. <span class="dialogue">"These people all claim to be having profound experiences, but they look rather... ordinary."</span>
+                <p>Word spread throughout the kingdom, and soon the palace was filled with spiritual seekers, each demonstrating their technique. One man sat in perfect stillness, claiming he could remain motionless for days. Another chanted "Ram Ram Ram" so continuously that he spoke of nothing else. A third spun in circles until he collapsed, insisting he had touched the divine.</p>
+                <p>After watching for hours, Akbar turned to Birbal in confusion. <span class="dialogue">"These people all claim to be having profound experiences, but they look rather... ordinary."</span></p>
             </div>
             <div class="page-number">6</div>
         </div>
@@ -439,7 +189,8 @@
         <div class="page-container" id="page7">
             <img src="images/story-1/image7.png" alt="Old beggar Gopal enters the court" class="page-image">
             <div class="page-text">
-                Just then, an old beggar named Gopal shuffled into the court. His clothes were torn, his hair wild, and he carried nothing but a simple bowl. <span class="dialogue">"Your Majesty,"</span> he wheezed, <span class="dialogue">"I heard about your contest. May I participate?"</span> The courtiers laughed. This ragged man clearly knew nothing about sophisticated spiritual practices. <span class="dialogue">"What is your method?"</span> Akbar asked kindly.
+                <p>Just then, an old beggar named Gopal shuffled into the court. His clothes were torn, his hair wild, and he carried nothing but a simple bowl. <span class="dialogue">"Your Majesty,"</span> he wheezed, <span class="dialogue">"I heard about your contest. May I participate?"</span></p>
+                <p>The courtiers laughed. This ragged man clearly knew nothing about sophisticated spiritual practices. <span class="dialogue">"What is your method?"</span> Akbar asked kindly.</p>
             </div>
             <div class="page-number">7</div>
         </div>
@@ -448,8 +199,8 @@
         <div class="page-container" id="page8">
             <img src="images/story-1/image8.png" alt="Gopal explaining his simple way" class="page-image">
             <div class="page-text">
-                <div class="dialogue">"No method, Your Majesty. I just... live."</div>
-                <div class="dialogue">"That's not a spiritual practice!" scoffed one of the mystics. "Where is your technique? Your discipline? Your system?"</div>
+                <p><span class="dialogue">"No method, Your Majesty. I just... live."</span></p>
+                <p><span class="dialogue">"That's not a spiritual practice!"</span> scoffed one of the mystics. <span class="dialogue">"Where is your technique? Your discipline? Your system?"</span></p>
                 <p>Gopal scratched his head. <span class="dialogue">"Well, when I'm hungry, I eat—if food is available. When I'm tired, I sleep—if there's a place to rest. When someone speaks to me, I listen. When I walk, I feel my feet on the ground. When it rains, I get wet."</span> The court erupted in laughter.</p>
             </div>
             <div class="page-number">8</div>
@@ -459,12 +210,12 @@
         <div class="page-container" id="page9">
             <img src="images/story-1/image9.png" alt="Birbal questioning Gopal" class="page-image">
             <div class="page-text">
-                But Birbal watched Gopal carefully. <span class="dialogue">"Tell me, old friend, do you ever have spiritual experiences?"</span>
-                <div class="dialogue">"What do you mean?"</div>
-                <div class="dialogue">"Visions of light, feelings of cosmic unity, encounters with the divine?"</div>
+                <p>But Birbal watched Gopal carefully. <span class="dialogue">"Tell me, old friend, do you ever have spiritual experiences?"</span></p>
+                <p><span class="dialogue">"What do you mean?"</span></p>
+                <p><span class="dialogue">"Visions of light, feelings of cosmic unity, encounters with the divine?"</span></p>
                 <p>Gopal looked puzzled. <span class="dialogue">"Right now I'm talking with you. Earlier I was walking. Before that, I was sitting in the shade listening to birds. I don't understand what you mean by 'experiences.' This is just... life happening."</span></p>
-                <div class="dialogue">"But don't you want something more?" Akbar asked. "Some greater meaning? Some ultimate satisfaction?"</div>
-                <div class="dialogue">"Who would want it?" Gopal replied simply. "When I'm thirsty, water satisfies. When I'm cold, warmth satisfies. When I'm lonely, conversation satisfies. What else is there to want?"</div>
+                <p><span class="dialogue">"But don't you want something more?"</span> Akbar asked. <span class="dialogue">"Some greater meaning? Some ultimate satisfaction?"</span></p>
+                <p><span class="dialogue">"Who would want it?"</span> Gopal replied simply. <span class="dialogue">"When I'm thirsty, water satisfies. When I'm cold, warmth satisfies. When I'm lonely, conversation satisfies. What else is there to want?"</span></p>
             </div>
             <div class="page-number">9</div>
         </div>
@@ -473,9 +224,9 @@
         <div class="page-container" id="page10">
             <img src="images/story-1/image10.png" alt="Akbar walking in his garden with Birbal" class="page-image">
             <div class="page-text">
-                That evening, Akbar walked in his garden with Birbal, deeply troubled. <span class="dialogue">"I don't understand, my friend. That beggar has no techniques, no practices, no spiritual experiences—yet there was something about him... It was like he wasn't trying to be anywhere else. Everyone else seemed to be performing—even when alone. But he was just... present."</span>
+                <p>That evening, Akbar walked in his garden with Birbal, deeply troubled. <span class="dialogue">"I don't understand, my friend. That beggar has no techniques, no practices, no spiritual experiences—yet there was something about him... It was like he wasn't trying to be anywhere else. Everyone else seemed to be performing—even when alone. But he was just... present."</span></p>
                 <p><span class="dialogue">"Your Majesty, may I ask you something? When you were a child playing by the river, completely absorbed in building castles in the sand, were you seeking enlightenment?"</span></p>
-                <div class="dialogue">"No, I was just... playing."</div>
+                <p><span class="dialogue">"No, I was just... playing."</span></p>
             </div>
             <div class="page-number">10</div>
         </div>
@@ -484,7 +235,8 @@
         <div class="page-container" id="page11">
             <img src="images/story-1/image11.png" alt="Akbar ruling with new understanding" class="page-image">
             <div class="page-text">
-                The next morning, Akbar announced his decision about the contest: <span class="dialogue">"No one."</span> He explained, <span class="dialogue">"Every contestant was trying to achieve, collect, or experience something special. But what they were seeking was already present in the very awareness that was seeking it."</span>
+                <p>The next morning, Akbar announced his decision about the contest: <span class="dialogue">"No one."</span></p>
+                <p>He explained, <span class="dialogue">"Every contestant was trying to achieve, collect, or experience something special. But what they were seeking was already present in the very awareness that was seeking it."</span></p>
                 <p>From that day forward, Emperor Akbar ruled his kingdom with a different quality of attention. Not because he had found something new, but because he had stopped looking for something other than what was already fully present in each moment of imperial life.</p>
                 <p>And whenever anyone asked Birbal about the Emperor's great spiritual transformation, he would simply smile and say: <span class="dialogue">"His Majesty discovered that the king he was trying to become was already sitting on the throne."</span></p>
             </div>
@@ -503,28 +255,20 @@
         const totalPages = 11;
 
         function showPage(pageNumber) {
-            // Hide all pages
             for (let i = 1; i <= totalPages; i++) {
                 const page = document.getElementById('page' + i);
-                if (page) {
-                    page.classList.remove('active');
-                }
+                if (page) page.classList.remove('active');
             }
-            
-            // Show current page
             const currentPageElement = document.getElementById('page' + pageNumber);
-            if (currentPageElement) {
-                currentPageElement.classList.add('active');
-            }
+            if (currentPageElement) currentPageElement.classList.add('active');
         }
 
         function updateNavigation() {
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
-            
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
-            
+
             if (currentPage === totalPages) {
                 nextBtn.innerHTML = '🌟 Finish';
                 nextBtn.onclick = () => {
@@ -563,7 +307,6 @@
             }
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             showPage(1);
             updateNavigation();
