@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whispered Tales - Digital Storybook</title>
+    <title>The Emperor's Silent Quest</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
         
@@ -158,6 +158,28 @@
             }
         }
 
+        .title-page {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .title-page h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c2016;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .title-page .author {
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            color: #8b4513;
+            font-style: italic;
+            margin-top: 30px;
+        }
+
         .page-image {
             width: 100%;
             height: 200px;
@@ -195,6 +217,21 @@
             letter-spacing: 0.3px;
             position: relative;
             z-index: 2;
+        }
+
+        .page-text p {
+            margin-bottom: 1.2em;
+        }
+
+        .page-text p:first-child {
+            text-indent: 0;
+        }
+
+        .dialogue {
+            margin: 1.5em 0;
+            padding-left: 1em;
+            border-left: 2px solid rgba(139, 69, 19, 0.2);
+            font-style: italic;
         }
 
         .page-number {
@@ -268,102 +305,6 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .story-selection {
-            padding: 32px;
-            background: 
-                radial-gradient(circle at 30% 70%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
-                linear-gradient(to bottom, #faf7f2, #f6f3ed);
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .story-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 28px 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            box-shadow: 
-                0 8px 24px rgba(0, 0, 0, 0.06),
-                0 0 0 1px rgba(255, 255, 255, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .story-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(255, 182, 193, 0.1) 0%, 
-                rgba(221, 160, 221, 0.08) 50%, 
-                rgba(173, 216, 230, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .story-card:hover::before {
-            opacity: 1;
-        }
-
-        .story-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(216, 180, 254, 0.6);
-            box-shadow: 
-                0 16px 40px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.8);
-        }
-
-        .story-card .icon {
-            font-size: 32px;
-            margin-bottom: 16px;
-            display: block;
-            position: relative;
-            z-index: 2;
-        }
-
-        .story-card h3 {
-            font-family: 'Crimson Text', serif;
-            color: #4a5568;
-            margin-bottom: 12px;
-            font-size: 20px;
-            font-weight: 600;
-            position: relative;
-            z-index: 2;
-        }
-
-        .story-card p {
-            color: #718096;
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 400;
-            position: relative;
-            z-index: 2;
-        }
-
-        .back-to-home {
-            background: linear-gradient(135deg, #ec4899, #db2777);
-            box-shadow: 
-                0 4px 12px rgba(236, 72, 153, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-        }
-
-        .back-to-home:hover {
-            box-shadow: 
-                0 6px 16px rgba(236, 72, 153, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-        }
-
         .progress-bar {
             position: absolute;
             bottom: 0;
@@ -402,6 +343,10 @@
                 line-height: 1.7;
             }
             
+            .title-page h2 {
+                font-size: 28px;
+            }
+            
             .navigation {
                 padding: 20px 24px;
             }
@@ -409,14 +354,6 @@
             .nav-button {
                 padding: 12px 20px;
                 font-size: 13px;
-            }
-            
-            .story-selection {
-                padding: 24px;
-            }
-            
-            .story-card {
-                padding: 24px 20px;
             }
         }
 
@@ -435,235 +372,202 @@
 <body>
     <div class="storybook-container">
         <div class="story-header">
-            <h1>Whispered Tales</h1>
-            <p>Where stories come alive</p>
+            <h1>The Emperor's Silent Quest</h1>
+            <p>A timeless tale of wisdom and discovery</p>
         </div>
 
-        <!-- Home/Story Selection -->
-        <div id="home-page" class="story-selection">
-            <div class="story-grid">
-                <div class="story-card" onclick="openStory('story1')">
-                    <span class="icon">🦁</span>
-                    <h3>The Brave Little Lion</h3>
-                    <p>A heartwarming tale of courage and friendship that blooms in the depths of the jungle</p>
-                </div>
-                <div class="story-card" onclick="openStory('story2')">
-                    <span class="icon">✨</span>
-                    <h3>The Starweaver's Gift</h3>
-                    <p>A celestial adventure where magic dances among the clouds and dreams take flight</p>
-                </div>
-                <div class="story-card" onclick="openStory('story3')">
-                    <span class="icon">🌸</span>
-                    <h3>Rosie's Garden of Wonders</h3>
-                    <p>A delicate story about discovering the beauty of friendship in unexpected places</p>
-                </div>
+        <!-- Page 1: Title Page -->
+        <div class="page-container active" id="page1">
+            <div class="title-page">
+                <img src="images/story-1/image1.png" alt="The Emperor's Silent Quest" class="page-image">
+                <h2>The Emperor's Silent Quest</h2>
+                <div class="author">A Story of Inner Discovery</div>
             </div>
+            <div class="page-number">1</div>
         </div>
 
-        <!-- Story 1: The Brave Little Lion -->
-        <div id="story1-container" style="display: none;">
-            <div class="page-container active" id="story1-page1">
-                <img src="https://via.placeholder.com/350x220/f4a261/ffffff?text=Little+Lion+Leo" alt="Little Lion Leo" class="page-image">
-                <div class="page-text">
-                    In a sun-dappled corner of the ancient Whispering Woods, there lived a young lion named Leo whose golden fur shimmered like captured sunlight. Though smaller than his peers, Leo possessed something far more precious—a heart overflowing with kindness and an unshakeable belief in the magic of friendship.
-                </div>
-                <div class="page-number">1</div>
+        <!-- Page 2 -->
+        <div class="page-container" id="page2">
+            <img src="images/story-1/image2.png" alt="Emperor Akbar in his palace" class="page-image">
+            <div class="page-text">
+                Emperor Akbar had everything a man could desire—vast kingdoms, infinite wealth, the finest foods, and the most beautiful palaces. Yet he felt restless, always seeking something more meaningful, something that would give him the ultimate satisfaction.
             </div>
-            
-            <div class="page-container" id="story1-page2">
-                <img src="https://via.placeholder.com/350x220/a8dadc/ffffff?text=Leo+Meets+Luna" alt="Leo meets Luna" class="page-image">
-                <div class="page-text">
-                    One misty morning, as dewdrops danced on spider's silk, Leo discovered a trembling little rabbit named Luna beneath a cluster of wild violets. Her eyes were filled with worry, for she had lost her way while gathering morning berries for her grandmother's special tea.
-                </div>
-                <div class="page-number">2</div>
-            </div>
-
-            <div class="page-container" id="story1-page3">
-                <img src="https://via.placeholder.com/350x220/e9c46a/ffffff?text=Journey+Together" alt="Leo and Luna's journey" class="page-image">
-                <div class="page-text">
-                    Without hesitation, Leo's courage bloomed like a wildflower. "Fear not, dear Luna," he said with gentle determination. "Together, we shall weave a path through any challenge." Hand in paw, they ventured forth, discovering that true bravery isn't about size—it's about the love we carry for others.
-                </div>
-                <div class="page-number">3</div>
-            </div>
-
-            <div class="navigation">
-                <button class="nav-button back-to-home" onclick="goHome()">🏠 Home</button>
-                <div style="display: flex; gap: 12px;">
-                    <button class="nav-button" id="story1-prev" onclick="previousPage('story1')" disabled>← Previous</button>
-                    <button class="nav-button" id="story1-next" onclick="nextPage('story1')">Next →</button>
-                </div>
-            </div>
-            <div class="progress-bar" id="story1-progress" style="width: 33.33%;"></div>
+            <div class="page-number">2</div>
         </div>
 
-        <!-- Story 2: The Starweaver's Gift -->
-        <div id="story2-container" style="display: none;">
-            <div class="page-container active" id="story2-page1">
-                <img src="https://via.placeholder.com/350x220/b19cd9/ffffff?text=Celestia+the+Star" alt="Celestia the Star" class="page-image">
-                <div class="page-text">
-                    Beyond the veil of twilight, in a realm where dreams and reality intertwine, lived Celestia—a star whose light was woven from pure compassion. Each night, she would spin silver threads of starlight to guide wandering souls safely through their journeys.
-                </div>
-                <div class="page-number">1</div>
+        <!-- Page 3 -->
+        <div class="page-container" id="page3">
+            <img src="images/story-1/image3.png" alt="Akbar consulting with mystics" class="page-image">
+            <div class="page-text">
+                <div class="dialogue">"I've consulted the greatest mystics in the empire. Some suggest fasting for forty days while chanting sacred mantras. Others recommend sitting motionless in meditation for months. The Sufi masters speak of whirling until consciousness dissolves. The yogis promise enlightenment through breathing techniques."</div>
             </div>
-            
-            <div class="page-container" id="story2-page2">
-                <img src="https://via.placeholder.com/350x220/ffb3ba/ffffff?text=Lost+Child+Maya" alt="Lost child Maya" class="page-image">
-                <div class="page-text">
-                    One storm-swept evening, Celestia noticed a young girl named Maya who had become separated from her family during a festival of lanterns. The tempest clouds had swallowed all other lights, leaving Maya alone in a world of shadows and whispered fears.
-                </div>
-                <div class="page-number">2</div>
-            </div>
-
-            <div class="page-container" id="story2-page3">
-                <img src="https://via.placeholder.com/350x220/ffffba/ffffff?text=Starlight+Path" alt="Celestia's starlight path" class="page-image">
-                <div class="page-text">
-                    With all the love in her celestial heart, Celestia began to weave the most beautiful tapestry of light the universe had ever seen. Her radiance pierced through storm and shadow, creating a luminous pathway that led Maya safely back to her family's warm embrace. From that night forward, Celestia became known as the Starweaver—the guardian of all lost hearts.
-                </div>
-                <div class="page-number">3</div>
-            </div>
-
-            <div class="navigation">
-                <button class="nav-button back-to-home" onclick="goHome()">🏠 Home</button>
-                <div style="display: flex; gap: 12px;">
-                    <button class="nav-button" id="story2-prev" onclick="previousPage('story2')" disabled>← Previous</button>
-                    <button class="nav-button" id="story2-next" onclick="nextPage('story2')">Next →</button>
-                </div>
-            </div>
-            <div class="progress-bar" id="story2-progress" style="width: 33.33%;"></div>
+            <div class="page-number">3</div>
         </div>
 
-        <!-- Story 3: Rosie's Garden of Wonders -->
-        <div id="story3-container" style="display: none;">
-            <div class="page-container active" id="story3-page1">
-                <img src="https://via.placeholder.com/350x220/ffcccb/ffffff?text=Shy+Rosie" alt="Shy little Rosie" class="page-image">
-                <div class="page-text">
-                    In a cottage garden painted with morning glory and sweet peas lived Rosie, a gentle soul with cheeks like rose petals and a heart that bloomed quietly. She would spend her days tending to her flowers, too shy to venture beyond her garden gate where other children played.
-                </div>
-                <div class="page-number">1</div>
+        <!-- Page 4 -->
+        <div class="page-container" id="page4">
+            <img src="images/story-1/image4.png" alt="Akbar speaking with Birbal" class="page-image">
+            <div class="page-text">
+                <div class="dialogue">"All excellent methods, Your Majesty. Which one appeals to you?"</div>
+                <p>Akbar's eyes gleamed. <span class="dialogue">"Why choose? I want to try them ALL! Surely combining every technique will give me the most powerful spiritual experience ever achieved!"</span></p>
             </div>
-            
-            <div class="page-container" id="story3-page2">
-                <img src="https://via.placeholder.com/350x220/c8e6c9/ffffff?text=Helping+Oliver" alt="Rosie helps Oliver" class="page-image">
-                <div class="page-text">
-                    One autumn day, a young hedgehog named Oliver wandered into Rosie's garden, his tiny paws full of scattered seeds from his winter collection. Seeing his distress, Rosie's compassion overcame her shyness. She knelt among the marigolds and helped gather every precious seed, her kindness blooming brighter than any flower.
-                </div>
-                <div class="page-number">2</div>
-            </div>
-
-            <div class="page-container" id="story3-page3">
-                <img src="https://via.placeholder.com/350x220/b3e5fc/ffffff?text=Garden+Friends" alt="Friends in the garden" class="page-image">
-                <div class="page-text">
-                    "Your garden is the most beautiful I've ever seen," Oliver whispered gratefully. Soon, word of Rosie's enchanted garden spread, and children began visiting not just for the flowers, but for Rosie's warm heart. She discovered that friendship, like her beloved garden, grows most beautifully when tended with love and patience.
-                </div>
-                <div class="page-number">3</div>
-            </div>
-
-            <div class="navigation">
-                <button class="nav-button back-to-home" onclick="goHome()">🏠 Home</button>
-                <div style="display: flex; gap: 12px;">
-                    <button class="nav-button" id="story3-prev" onclick="previousPage('story3')" disabled>← Previous</button>
-                    <button class="nav-button" id="story3-next" onclick="nextPage('story3')">Next →</button>
-                </div>
-            </div>
-            <div class="progress-bar" id="story3-progress" style="width: 33.33%;"></div>
+            <div class="page-number">4</div>
         </div>
+
+        <!-- Page 5 -->
+        <div class="page-container" id="page5">
+            <img src="images/story-1/image5.png" alt="Birbal proposing his experiment" class="page-image">
+            <div class="page-text">
+                <div class="dialogue">"Brilliant logic," Birbal nodded. "But may I suggest something first?"</div>
+                <div class="dialogue">"Of course."</div>
+                <div class="dialogue">"Before we begin this grand spiritual adventure, perhaps we should test these methods scientifically. Let me conduct a small experiment."</div>
+                <p>Intrigued, Akbar agreed. The next day, Birbal announced a contest in the royal court. <span class="dialogue">"His Majesty wishes to reward the person who can have the most extraordinary spiritual experience using any method they choose. The winner will receive a thousand gold coins!"</span></p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <!-- Page 6 -->
+        <div class="page-container" id="page6">
+            <img src="images/story-1/image6.png" alt="Spiritual seekers in the palace" class="page-image">
+            <div class="page-text">
+                Word spread throughout the kingdom, and soon the palace was filled with spiritual seekers, each demonstrating their technique. One man sat in perfect stillness, claiming he could remain motionless for days. Another chanted "Ram Ram Ram" so continuously that he spoke of nothing else. A third spun in circles until he collapsed, insisting he had touched the divine. After watching for hours, Akbar turned to Birbal in confusion. <span class="dialogue">"These people all claim to be having profound experiences, but they look rather... ordinary."</span>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <!-- Page 7 -->
+        <div class="page-container" id="page7">
+            <img src="images/story-1/image7.png" alt="Old beggar Gopal enters the court" class="page-image">
+            <div class="page-text">
+                Just then, an old beggar named Gopal shuffled into the court. His clothes were torn, his hair wild, and he carried nothing but a simple bowl. <span class="dialogue">"Your Majesty,"</span> he wheezed, <span class="dialogue">"I heard about your contest. May I participate?"</span> The courtiers laughed. This ragged man clearly knew nothing about sophisticated spiritual practices. <span class="dialogue">"What is your method?"</span> Akbar asked kindly.
+            </div>
+            <div class="page-number">7</div>
+        </div>
+
+        <!-- Page 8 -->
+        <div class="page-container" id="page8">
+            <img src="images/story-1/image8.png" alt="Gopal explaining his simple way" class="page-image">
+            <div class="page-text">
+                <div class="dialogue">"No method, Your Majesty. I just... live."</div>
+                <div class="dialogue">"That's not a spiritual practice!" scoffed one of the mystics. "Where is your technique? Your discipline? Your system?"</div>
+                <p>Gopal scratched his head. <span class="dialogue">"Well, when I'm hungry, I eat—if food is available. When I'm tired, I sleep—if there's a place to rest. When someone speaks to me, I listen. When I walk, I feel my feet on the ground. When it rains, I get wet."</span> The court erupted in laughter.</p>
+            </div>
+            <div class="page-number">8</div>
+        </div>
+
+        <!-- Page 9 -->
+        <div class="page-container" id="page9">
+            <img src="images/story-1/image9.png" alt="Birbal questioning Gopal" class="page-image">
+            <div class="page-text">
+                But Birbal watched Gopal carefully. <span class="dialogue">"Tell me, old friend, do you ever have spiritual experiences?"</span>
+                <div class="dialogue">"What do you mean?"</div>
+                <div class="dialogue">"Visions of light, feelings of cosmic unity, encounters with the divine?"</div>
+                <p>Gopal looked puzzled. <span class="dialogue">"Right now I'm talking with you. Earlier I was walking. Before that, I was sitting in the shade listening to birds. I don't understand what you mean by 'experiences.' This is just... life happening."</span></p>
+                <div class="dialogue">"But don't you want something more?" Akbar asked. "Some greater meaning? Some ultimate satisfaction?"</div>
+                <div class="dialogue">"Who would want it?" Gopal replied simply. "When I'm thirsty, water satisfies. When I'm cold, warmth satisfies. When I'm lonely, conversation satisfies. What else is there to want?"</div>
+            </div>
+            <div class="page-number">9</div>
+        </div>
+
+        <!-- Page 10 -->
+        <div class="page-container" id="page10">
+            <img src="images/story-1/image10.png" alt="Akbar walking in his garden with Birbal" class="page-image">
+            <div class="page-text">
+                That evening, Akbar walked in his garden with Birbal, deeply troubled. <span class="dialogue">"I don't understand, my friend. That beggar has no techniques, no practices, no spiritual experiences—yet there was something about him... It was like he wasn't trying to be anywhere else. Everyone else seemed to be performing—even when alone. But he was just... present."</span>
+                <p><span class="dialogue">"Your Majesty, may I ask you something? When you were a child playing by the river, completely absorbed in building castles in the sand, were you seeking enlightenment?"</span></p>
+                <div class="dialogue">"No, I was just... playing."</div>
+            </div>
+            <div class="page-number">10</div>
+        </div>
+
+        <!-- Page 11: Final Page -->
+        <div class="page-container" id="page11">
+            <img src="images/story-1/image11.png" alt="Akbar ruling with new understanding" class="page-image">
+            <div class="page-text">
+                The next morning, Akbar announced his decision about the contest: <span class="dialogue">"No one."</span> He explained, <span class="dialogue">"Every contestant was trying to achieve, collect, or experience something special. But what they were seeking was already present in the very awareness that was seeking it."</span>
+                <p>From that day forward, Emperor Akbar ruled his kingdom with a different quality of attention. Not because he had found something new, but because he had stopped looking for something other than what was already fully present in each moment of imperial life.</p>
+                <p>And whenever anyone asked Birbal about the Emperor's great spiritual transformation, he would simply smile and say: <span class="dialogue">"His Majesty discovered that the king he was trying to become was already sitting on the throne."</span></p>
+            </div>
+            <div class="page-number">11</div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" id="prev-btn" onclick="previousPage()" disabled>← Previous</button>
+            <button class="nav-button" id="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+        <div class="progress-bar" id="progress-bar" style="width: 9.09%;"></div>
     </div>
 
     <script>
-        let currentPages = {
-            story1: 1,
-            story2: 1,
-            story3: 1
-        };
+        let currentPage = 1;
+        const totalPages = 11;
 
-        const totalPages = {
-            story1: 3,
-            story2: 3,
-            story3: 3
-        };
-
-        function openStory(storyId) {
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById(storyId + '-container').style.display = 'block';
-            currentPages[storyId] = 1;
-            updateNavigation(storyId);
-            updateProgress(storyId);
-        }
-
-        function goHome() {
-            // Hide all story containers
-            document.querySelectorAll('[id$="-container"]').forEach(container => {
-                container.style.display = 'none';
-            });
-            // Show home page
-            document.getElementById('home-page').style.display = 'block';
-            
-            // Reset all stories to page 1
-            Object.keys(currentPages).forEach(story => {
-                currentPages[story] = 1;
-                showPage(story, 1);
-            });
-        }
-
-        function nextPage(storyId) {
-            if (currentPages[storyId] < totalPages[storyId]) {
-                currentPages[storyId]++;
-                showPage(storyId, currentPages[storyId]);
-                updateNavigation(storyId);
-                updateProgress(storyId);
-            }
-        }
-
-        function previousPage(storyId) {
-            if (currentPages[storyId] > 1) {
-                currentPages[storyId]--;
-                showPage(storyId, currentPages[storyId]);
-                updateNavigation(storyId);
-                updateProgress(storyId);
-            }
-        }
-
-        function showPage(storyId, pageNumber) {
-            // Hide all pages for this story
-            for (let i = 1; i <= totalPages[storyId]; i++) {
-                const page = document.getElementById(storyId + '-page' + i);
+        function showPage(pageNumber) {
+            // Hide all pages
+            for (let i = 1; i <= totalPages; i++) {
+                const page = document.getElementById('page' + i);
                 if (page) {
                     page.classList.remove('active');
                 }
             }
             
             // Show current page
-            const currentPage = document.getElementById(storyId + '-page' + pageNumber);
-            if (currentPage) {
-                currentPage.classList.add('active');
+            const currentPageElement = document.getElementById('page' + pageNumber);
+            if (currentPageElement) {
+                currentPageElement.classList.add('active');
             }
         }
 
-        function updateProgress(storyId) {
-            const progressBar = document.getElementById(storyId + '-progress');
-            const progress = (currentPages[storyId] / totalPages[storyId]) * 100;
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            if (currentPage === totalPages) {
+                nextBtn.innerHTML = '🌟 Finish';
+                nextBtn.onclick = () => {
+                    currentPage = 1;
+                    showPage(currentPage);
+                    updateNavigation();
+                    updateProgress();
+                };
+            } else {
+                nextBtn.innerHTML = 'Next →';
+                nextBtn.onclick = () => nextPage();
+            }
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const progress = (currentPage / totalPages) * 100;
             progressBar.style.width = progress + '%';
         }
 
-        function updateNavigation(storyId) {
-            const prevBtn = document.getElementById(storyId + '-prev');
-            const nextBtn = document.getElementById(storyId + '-next');
-            
-            prevBtn.disabled = currentPages[storyId] === 1;
-            nextBtn.disabled = currentPages[storyId] === totalPages[storyId];
-            
-            if (currentPages[storyId] === totalPages[storyId]) {
-                nextBtn.innerHTML = '🌟 Finish';
-                nextBtn.onclick = () => goHome();
-            } else {
-                nextBtn.innerHTML = 'Next →';
-                nextBtn.onclick = () => nextPage(storyId);
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+                updateNavigation();
+                updateProgress();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+                updateNavigation();
+                updateProgress();
             }
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            goHome();
+            showPage(1);
+            updateNavigation();
+            updateProgress();
         });
     </script>
 </body>
